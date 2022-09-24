@@ -1,5 +1,6 @@
 
 const Header = (props) =>{
+  //console.log(props)
 
 return(
   <h1>{props.course}</h1>
@@ -8,54 +9,64 @@ return(
 const Part = (props) =>{
   return(
     <p>
-    {props.part} {props.exercises}
+    {props.name} {props.exercises}
   </p>
   )
 }
 
 
-const Content = props => {
-
+const Content = (props) => {
+  console.log(props.parts[0].e)
   return(
   <>
-  <Part part={props.part1} excersises={props.exercises1} />
-  <Part part={props.part2} excersises={props.exercises2} />
-  <Part part={props.part3} excersises={props.exercises3} />
+  <Part name={props.parts[0].name} excersises={props.parts[0].excersises} />
+  <Part name={props.parts[1].name} excersises={props.parts[1].excersises} />
+  <Part name={props.parts[2].name} excersises={props.parts[2].excersises} />
   </>
   )
 }
 
-const Total = (props) =>{
-
-
+const Total = (props) => {
+  //console.log(props.parts[0].exercises)
+  const Sum = (...parts) =>{
+    //console.log(parts[0])
+    let sum = 0
+    parts[0].forEach(element => {
+      sum += element.exercises  
+      //console.log(element.exercises  )
+    });
+    //console.log(sum)
+    return sum
+  }
   return(
-    <p>Number of exercises {props.exercises1 + props.exercises2 + props.exercises3}</p>
+    <p>Number of exercises {Sum(props.parts)}</p>
 
   )
 }
 
 const App = () => {
   const course = 'Half Stack application development'
-  const part1 = {
-    name: 'Fundamentals of React',
-    exercises: 10
-  } 
-  const part2 = {
-    name: 'Using props to pass data of React',
-    exercises: 7
-  }
-  const part3 = {
-    name:'State of a component', 
-    exercises: 14
-  } 
+  const parts = [
+    {
+      name: 'Fundamentals of React',
+      exercises: 10
+    },
+   {
+      name: 'Using props to pass data of React',
+      exercises: 7
+    },
+    {
+      name:'State of a component', 
+      exercises: 14
+    } 
+  ]
 
 
   return (
     <div>
       <Header course={course} />
-      <Content part1={part1.name} part2={part2.name} part3={part3.name}/>
-      <Total exercises1={part1.exercises} exercises2={part2.exercises} exercises3={part3.exercises}/>
-     
+      <Content parts={parts}/>
+      <Total parts={parts}/> 
     </div>
   )
 }
