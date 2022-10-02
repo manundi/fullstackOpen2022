@@ -1,75 +1,26 @@
-
-const Header = (props) =>{
-  //console.log(props)
-
-return(
-  <h1>{props.course}</h1>
-)}
-
-const Part = (props) =>{
-  return(
-    <p>
-    {props.name} {props.exercises}
-  </p>
-  )
-}
-
-
-const Content = (props) => {
-  console.log(props.parts[0].e)
-  return(
-  <>
-  <Part name={props.parts[0].name} excersises={props.parts[0].excersises} />
-  <Part name={props.parts[1].name} excersises={props.parts[1].excersises} />
-  <Part name={props.parts[2].name} excersises={props.parts[2].excersises} />
-  </>
-  )
-}
-
-const Total = (props) => {
-  //console.log(props.parts[0].exercises)
-  const Sum = (...parts) =>{
-    //console.log(parts[0])
-    let sum = 0
-    parts[0].forEach(element => {
-      sum += element.exercises  
-      //console.log(element.exercises  )
-    });
-    //console.log(sum)
-    return sum
-  }
-  return(
-    <p>Number of exercises {Sum(props.parts)}</p>
-
-  )
-}
+import { useState } from "react";
 
 const App = () => {
-  const course = {
-    name:  'Half Stack application development',
-    parts: [
-    {
-      name: 'Fundamentals of React',
-      exercises: 10
-    },
-   {
-      name: 'Using props to pass data of React',
-      exercises: 7
-    },
-    {
-      name:'State of a component', 
-      exercises: 14
-    } 
-  ]}
+const [counter, setCounter] = useState(0)
 
+const Display = ({counter}) => <div>{counter}</div>
 
-  return (
-    <div>
-      <Header course={course.name} />
-      <Content parts={course.parts}/>
-      <Total parts={course.parts}/> 
-    </div>
-  )
+const Button = ({handleClick,text}) =>{
+    <button onClick={handleClick}> {text}</button>
 }
+const increaseCounter = () =>  setCounter(counter+1)
+const decreaseCounter = () =>  setCounter(counter-1)
+const zeroCounter = () => setCounter(0)
 
+return(
+<>
+  <Display counter= {counter}/>
+  <Button handleClick={increaseCounter} text="lisaa"/> 
+  <Button handleClick={zeroCounter} text="nollaa"/> 
+  <Button handleClick={decreaseCounter} text="vahenna"/> 
+</>
+
+)
+
+}
 export default App
