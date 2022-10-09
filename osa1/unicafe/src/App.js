@@ -2,6 +2,7 @@ import {React,useState} from "react"
 
 const Statistics = ({good,neutral,bad}) =>{
   const All = () => good+neutral+bad
+  if(All() == 0 ) return <>Click to add feedback!</>
   const Avarage = () =>{
     let Avg = (good - bad) / All()
     return Avg
