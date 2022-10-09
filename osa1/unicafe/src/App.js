@@ -1,13 +1,21 @@
 import {React,useState} from "react"
 
 const Statistics = ({good,neutral,bad}) =>{
-
+  const All = () => good+neutral+bad
+  const Avarage = () =>{
+    let Avg = (good - bad) / All()
+    return Avg
+  }
+  const Positives = () => <>{good/All()*100} %</> 
 return(
 <>
 <h1>Statistics </h1> <br/>
 Good = {good} <br/>
 Neutral = {neutral} <br/>
-Bad  = {bad}
+Bad  = {bad} <br/>
+All = {All()} <br/>
+Avarage ={Avarage()}<br/>
+Positives = {Positives()}<br/>
 </>
 )
 
