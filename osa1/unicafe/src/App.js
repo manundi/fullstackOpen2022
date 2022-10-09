@@ -1,22 +1,31 @@
 import {React,useState} from "react"
+const StatisticLine = ({text,value}) => <tr><td>{text} = </td><td>{value}</td></tr>
 
 const Statistics = ({good,neutral,bad}) =>{
-  const All = () => good+neutral+bad
-  if(All() == 0 ) return <>Click to add feedback!</>
-  const Avarage = () =>{
-    let Avg = (good - bad) / All()
-    return Avg
+
+  const all = () => good+neutral+bad
+  if(all() == 0 ) return <>Click to add feedback!</>
+  const average = () =>{
+    let avg = (good - bad) / all()
+    return avg
   }
-  const Positives = () => <>{good/All()*100} %</> 
+
+  const positives = () => <>{good/all()*100} %</> 
 return(
 <>
 <h1>Statistics </h1> <br/>
-Good = {good} <br/>
-Neutral = {neutral} <br/>
-Bad  = {bad} <br/>
-All = {All()} <br/>
-Avarage ={Avarage()}<br/>
-Positives = {Positives()}<br/>
+<table>
+  <tbody>
+  <StatisticLine text={"Good"} value={good}/>
+  <StatisticLine text={"Neutral"} value={neutral}/>
+  <StatisticLine text={"Bad"} value={bad}/>
+  <StatisticLine text={"All"} value={all()}/>
+  <StatisticLine text={"Average"} value={average()}/>
+  <StatisticLine text={"Positives"} value={positives()}/>
+  </tbody>
+</table>
+
+
 </>
 )
 
