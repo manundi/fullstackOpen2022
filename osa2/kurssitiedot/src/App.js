@@ -1,4 +1,5 @@
 import Course from "./components/Course";
+//kaikki omissa moduuleissa
 
 const App = () => {
   const courses = [
