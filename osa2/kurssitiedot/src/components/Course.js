@@ -8,13 +8,10 @@ const Course = ({course}) =>{
         //console.log(props.parts[0].exercises)
 
         const Sum = (...parts) =>{
-          //console.log(parts[0])
           let sum = 0
           parts[0].forEach(element => {
             sum += element.exercises  
-            //console.log(element.exercises  )
           });
-          //console.log(sum)
           return sum
         }
         return(
