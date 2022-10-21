@@ -2,21 +2,10 @@ import Content from "./Content"
 import Header from "./Header"
 
 const Course = ({course}) =>{
-
-      
-      const Total = (props) => {
-        //console.log(props.parts[0].exercises)
-
-        const Sum = (...parts) =>{
-          let sum = 0
-          parts[0].forEach(element => {
-            sum += element.exercises  
-          });
-          return sum
-        }
+      const Total = ({parts}) => {
+        const sum = parts.reduce( (sum,part) => sum +part.exercises,0)
         return(
-          <p>Number of exercises {Sum(props.parts)}</p>
-      
+          <b>Number of exercises: {sum}</b>
         )
       }
       
