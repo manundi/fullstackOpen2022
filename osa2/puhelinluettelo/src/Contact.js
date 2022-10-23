@@ -1,3 +1,3 @@
-const Contact = ({person}) => <li>{person.name} </li> 
+const Contact = ({person}) => <li>{person.name} {person.tel} </li> 
 
 export default Contact
