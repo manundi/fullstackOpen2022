@@ -1,5 +1,7 @@
 import { useState } from "react";
-import Contact from "./Contact";
+import AddPersonForm from "./AddPersonForm";
+import PersonsList from "./PersonsList";
+import FilterForm from "./FilterForm";
 
 const App = () => {
 const [persons,setPersons] = useState([
@@ -26,8 +28,9 @@ const handleSubmit = (event) =>{
     alert(`${newPerson.name} is already in contacts`)
     return
   }
-  setPersons(persons.concat(newPerson))
-  setPersonsToShow(persons)
+  let newPersons = persons.concat(newPerson)
+  setPersons(newPersons)
+  setPersonsToShow(newPersons)
   event.target.reset()
 }
 
@@ -39,30 +42,12 @@ const handleFilter = (event) =>{
 }
   return (
   <>
-  <h2>Phoneboook</h2>
-  <h2>Add New:</h2>
-  <form onSubmit={handleSubmit}>
-    <div>
-      name: <input onChange={handleNameChange}></input>
-    </div>
-    <div>
-      phone number: <input onChange={handleTelChange}></input>
-    </div>
-    <div> 
-      <button type="submit" onChange={handleNameChange}>add</button>
-    </div>
-
-  </form>
-  <div>
-    Filter with:  <input onChange={handleFilter}></input>
-  </div>
- 
-  <h2>Numbers</h2>
-  <ul>
-    {personsToShow.map(person => <Contact key={person.name} person={person}/>)} 
-  </ul>
-
-  {/* DEBUG: {newName} */}
+    <h2>Phoneboook</h2>
+    <h2>Add New:</h2>
+    <AddPersonForm handleNameChange={handleNameChange} handleTelChange={handleTelChange} handleSubmit={handleSubmit}/>
+    <FilterForm handleChange={handleFilter}/>
+    <h2>Numbers:</h2>
+    <PersonsList persons={personsToShow}/>
   </>
   );
 }
