@@ -13,7 +13,14 @@ const handleChange = (event) =>{
 }
 const handleSubmit = (event) =>{
   event.preventDefault()
-  setPersons(persons.concat({name: newName}))
+  let newPerson = {}
+  newPerson.name = newName
+  if(persons.find(person => person.name === newPerson.name)){
+    alert(`${newPerson.name} is already in contacts`)
+    return
+  }
+ 
+  setPersons(persons.concat(newPerson))
   event.target.reset()
 }
   return (
