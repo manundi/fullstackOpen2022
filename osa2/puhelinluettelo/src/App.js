@@ -3,8 +3,9 @@ import Contact from "./Contact";
 
 const App = () => {
 const [persons,setPersons] = useState([
-  {name : "Arto Hellas"}
+  {name : "Arto Hellas"},  {name : "Drtdaso Hellas"},  {name : "Bffrto Hellas"}
 ])
+const [personsToShow,setPersonsToShow] = useState(persons)
 const [newName,setNewName] = useState('')
 const [newTel,setNewTel] = useState('')
 
@@ -25,13 +26,21 @@ const handleSubmit = (event) =>{
     alert(`${newPerson.name} is already in contacts`)
     return
   }
- 
   setPersons(persons.concat(newPerson))
+  setPersonsToShow(persons)
   event.target.reset()
+}
+
+const handleFilter = (event) =>{
+  event.preventDefault()
+  let filteredPersons= persons.filter(person => person.name.toLowerCase().includes(event.target.value.toLowerCase()))
+  setPersonsToShow(filteredPersons)
+
 }
   return (
   <>
   <h2>Phoneboook</h2>
+  <h2>Add New:</h2>
   <form onSubmit={handleSubmit}>
     <div>
       name: <input onChange={handleNameChange}></input>
@@ -44,12 +53,16 @@ const handleSubmit = (event) =>{
     </div>
 
   </form>
+  <div>
+    Filter with:  <input onChange={handleFilter}></input>
+  </div>
+ 
   <h2>Numbers</h2>
   <ul>
-    {persons.map(person => <Contact key={person.name} person={person}/>)} 
+    {personsToShow.map(person => <Contact key={person.name} person={person}/>)} 
   </ul>
 
-  DEBUG: {newName}
+  {/* DEBUG: {newName} */}
   </>
   );
 }
