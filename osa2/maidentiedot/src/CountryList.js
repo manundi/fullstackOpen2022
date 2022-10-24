@@ -11,13 +11,9 @@ const CountryList = ({countries}) =>{
             </div>
         )
     }
-
-    console.log("kakak",oneCountry)
     const handleButton = (countryToShow) => {
-        console.log("valittumaa", countryToShow.name.common)
         setOneCountry(countryToShow)
-        return <CountryInfo country={countryToShow}/>
-        
+        return <CountryInfo country={countryToShow}/>   
     }
     if(!countries.length) return
     if(countries.length > 10) return <div>Too many results be more spesific!</div>
@@ -25,12 +21,11 @@ const CountryList = ({countries}) =>{
 
     return(
         <ul>
-        {countries.map(country =>
-            <div>
-                <li key={country.name.common}>{country.name.common} <button key={country.name.common} onClick={()=>handleButton(country)}>show</button></li> 
-            </div>  
-        )}
-            
+            {countries.map(country =>
+                <div key={country.name.common}>
+                    <li key={country.name.common}>{country.name.common} <button key={country.name.common} onClick={()=>handleButton(country)}>show</button></li> 
+                </div>  
+            )}    
         </ul>
     )
    }

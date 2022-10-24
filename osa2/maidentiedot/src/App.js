@@ -6,12 +6,10 @@ const App = () =>{
   const [allCountries,setAllCountries] = useState([])
   const [countryList, setCountryList] = useState([])
   useEffect(() => {
-    console.log("efekti")
     axios
       .get("https://restcountries.com/v3.1/all")
       .then(res =>{
         setAllCountries(res.data)
-        console.log(res.data)
       }) 
   },[])
  
