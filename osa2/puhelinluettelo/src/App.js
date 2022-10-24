@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import AddPersonForm from "./AddPersonForm";
 import PersonsList from "./PersonsList";
 import FilterForm from "./FilterForm";
-
+import axios from "axios"
 const App = () => {
 const [persons,setPersons] = useState([
   {name : "Arto Hellas"},  {name : "Drtdaso Hellas"},  {name : "Bffrto Hellas"}
@@ -38,8 +38,19 @@ const handleFilter = (event) =>{
   event.preventDefault()
   let filteredPersons= persons.filter(person => person.name.toLowerCase().includes(event.target.value.toLowerCase()))
   setPersonsToShow(filteredPersons)
-
 }
+useEffect(() =>{
+  console.log("efekti")
+  axios
+    .get("http://localhost:3001/persons")
+    .then(res =>{
+      console.log(res.data)
+      setPersons(res.data)
+      setPersonsToShow(res.data)
+    })
+
+    
+},[])
   return (
   <>
     <h2>Phoneboook</h2>
