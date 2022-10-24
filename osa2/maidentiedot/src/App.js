@@ -2,8 +2,6 @@ import axios from "axios"
 import { useState, useEffect } from "react"
 import CountryList from "./CountryList"
 
-
-
 const App = () =>{
   const [allCountries,setAllCountries] = useState([])
   const [countryList, setCountryList] = useState([])
@@ -17,7 +15,6 @@ const App = () =>{
       }) 
   },[])
  
-
   const handleChange = (event) =>{
     const filtered = allCountries.filter(country => country.name.common.toLowerCase().includes(event.target.value.toLowerCase()))
     setCountryList(filtered)
