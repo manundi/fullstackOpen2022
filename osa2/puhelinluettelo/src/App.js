@@ -40,6 +40,15 @@ const App = () => {
     event.target.reset()
   }
 
+  const handleRemove = (id) =>{
+    console.log("poistan ", id)
+    contactsService.remove(id)
+      .catch(error => alert(error.data))  
+    contactsService.getAll()
+      .then(initialContacts => setPersons(initialContacts))
+      .catch(error => alert(error.data))  
+  }
+
   const handleFilter = (event) =>{
     event.preventDefault()
     let filteredPersons = persons.filter(person => person.name.toLowerCase().includes(event.target.value.toLowerCase()))
@@ -53,11 +62,9 @@ const App = () => {
   },[persons])
 
   useEffect(() =>{
-    console.log("efekti")
     contactsService.getAll()
       .then(initialContacts => setPersons(initialContacts))
-      .catch(error => alert(error.data))
-      
+      .catch(error => alert(error.data))  
   },[])
   
   return (
@@ -67,7 +74,7 @@ const App = () => {
     <AddPersonForm handleNameChange={handleNameChange} handleTelChange={handleTelChange} handleSubmit={handleSubmit}/>
     <FilterForm handleChange={handleFilter}/>
     <h2>Numbers:</h2>
-    <PersonsList persons={personsToShow}/>
+    <PersonsList persons={personsToShow} handleRemove={handleRemove} />
   </>
   );
 }

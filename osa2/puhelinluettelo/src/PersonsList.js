@@ -1,4 +1,19 @@
-import Contact from "./Contact"
-const PersonsList = ({persons}) =><ul> {persons.map(person => <Contact key={person.name} person={person}/>)} </ul>
+
+const PersonsList = ({persons, handleRemove}) =>{
+    return(
+        <ul> 
+            {persons.map(person =>
+                <li key={person.id}>
+                    {person.name} {person.tel}  
+                    <button 
+                    key={person.id} 
+                    onClick={()=>handleRemove(person.id)}>
+                    DELETE</button>
+                </li>
+            )} 
+        </ul> 
+    ) 
+}
+
  
 export default PersonsList
