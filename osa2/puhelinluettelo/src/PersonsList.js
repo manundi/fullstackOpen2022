@@ -3,6 +3,7 @@ const PersonsList = ({persons, handleRemove}) =>{
     return(
         <ul> 
             {persons.map(person =>
+           
                 <li key={person.id}>
                     {person.name} {person.tel}  
                     <button 

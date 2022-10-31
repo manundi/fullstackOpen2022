@@ -25,28 +25,31 @@ const App = () => {
     let newPerson = {}
     newPerson.name = newName
     newPerson.tel = newTel
-    if(persons.find(person => person.name === newPerson.name)){
-      alert(`${newPerson.name} is already in contacts`)
+    let persontoUpdate = persons.find(person => person.name === newPerson.name)
+    if(persontoUpdate){
+      let update = window.confirm(`${newPerson.name} is already in contacts, do you want to update the number with ${newPerson.tel}`)
+      if(!update)return
+      persontoUpdate.tel = newTel
+      setNewTel('')
+      setNewName('')
       return
     }
-    //let newPersons = persons.concat(newPerson)
-
     contactsService.create(newPerson)
       .then(response =>
         setPersons(persons.concat(response))
         )
-      .then(res => console.log(res))
       .catch(error => alert(error))
     event.target.reset()
   }
 
   const handleRemove = (id) =>{
-    console.log("poistan ", id)
     contactsService.remove(id)
-      .catch(error => alert(error.data))  
-    contactsService.getAll()
-      .then(initialContacts => setPersons(initialContacts))
-      .catch(error => alert(error.data))  
+      .then(() => {
+      let newContacts = Array.from(persons)
+      newContacts = newContacts.filter(p => p.id !== id)
+      setPersons(newContacts)
+      })
+      .catch(error => alert(error)) 
   }
 
   const handleFilter = (event) =>{
@@ -56,8 +59,6 @@ const App = () => {
   }
 
   useEffect( () =>{
-    console.log("Perons muttui")
-    console.log(persons)
     setPersonsToShow(persons)
   },[persons])
 

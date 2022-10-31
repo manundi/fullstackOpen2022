@@ -3,7 +3,6 @@ const FilterForm = ({handleChange}) => {
         <div>
         Filter with:  <input onChange={handleChange}></input>
         </div>
-
     )
 }
 export default FilterForm

@@ -14,6 +14,11 @@ const create = newObject =>{
 const remove = id =>{
     const url = baseurl+`/${id}`
     const request = axios.delete(url)
+    return request.then()
+}
+const updateNumber = (id,number) =>{
+    const url = baseurl+`/${id}`
+    const request = axios.put(url)
     return request.then(response => response.data)
 }
 
